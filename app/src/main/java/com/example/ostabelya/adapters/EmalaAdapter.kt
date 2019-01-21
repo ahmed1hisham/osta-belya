@@ -8,6 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.ostabelya.R
 import com.example.ostabelya.models.Worker
+import android.content.DialogInterface
+import android.content.Intent
+import com.example.ostabelya.activities.CreateOrder
+
 
 class EmalaAdapter(val workers: ArrayList<Worker>) : RecyclerView.Adapter<EmalaAdapter.ViewHolder>() {
 
@@ -17,10 +21,18 @@ class EmalaAdapter(val workers: ArrayList<Worker>) : RecyclerView.Adapter<EmalaA
     }
 
     override fun getItemCount(): Int = workers.size
-    
+
     override fun onBindViewHolder(holder: EmalaAdapter.ViewHolder, position: Int) {
         //picasso to show the image?
-        println("el el " + workers[position].name)
+        holder.itemView.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val cont = v!!.getContext()
+                val intent = Intent(cont, CreateOrder::class.java)
+                intent.putExtra("currentWorker", workers.get(position).wid)
+                cont.startActivity(intent)
+                println()
+            }
+        })
         holder.name.text = workers[position].name
         holder.salary.text = "" + workers[position].salary
     }
