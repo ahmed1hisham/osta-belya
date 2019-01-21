@@ -13,6 +13,7 @@ import com.example.ostabelya.models.Order;
 import kotlin.Unit;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class CreateOrder extends AppCompatActivity {
 
@@ -28,8 +29,18 @@ public class CreateOrder extends AppCompatActivity {
         Date orderDate = new Date();
         String token = "Token ya HUSSIEEN";
         FirebaseUtils.Companion.getCurrentAuthMechanic((mid)->{
-            Order order = new Order("hsbhds", mid, getIntent().getStringExtra("EXTRA_SESSION_ID"),token, money, orderDate.toString());
+            String uid = getIntent().getStringExtra("EXTRA_SESSION_ID");
+            Order order = new Order(UUID.randomUUID().toString(), mid, uid, token, money, orderDate.toString());
+
             FirebaseUtils.Companion.addOrderToMechanic(order,() -> {
+                Toast.makeText(CreateOrder.this, "Order Added", Toast.LENGTH_SHORT).show();
+                return Unit.INSTANCE;
+            }, () ->{
+                Toast.makeText(CreateOrder.this, "Try Again", Toast.LENGTH_SHORT).show();
+                return Unit.INSTANCE;
+            });
+
+            FirebaseUtils.Companion.addPaymentRequestToCustomer(order,uid, ()->{
                 Toast.makeText(CreateOrder.this, "Order Added", Toast.LENGTH_SHORT).show();
                 return Unit.INSTANCE;
             }, () ->{
