@@ -1,11 +1,11 @@
 package com.example.ostabelya.models;
 
 public class Request {
-    private Customer user;
-    private Mechanic mechanic;
-    private String requestDate;
-    private String requestSlot;
-    private String status;
+    public Customer user;
+    public Mechanic mechanic;
+    public String requestDate;
+    public String requestSlot;
+    public String status;
 
     public Request(Customer customer, Mechanic mechanic, String requestDate, String requestSlot, String status){
         this.user = customer;

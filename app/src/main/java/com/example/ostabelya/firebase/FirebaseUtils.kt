@@ -61,7 +61,7 @@ class FirebaseUtils {
 
         fun getMerchantRequests(onSuccess: (ArrayList<Request>) -> Unit, onFailure: () -> Unit) {
 
-            firebaseDatabase.reference.child("request").child(firebaseAuth.currentUser!!.uid).child("requests")
+            firebaseDatabase.reference.child("request").child("100").child("requests")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         onFailure()
