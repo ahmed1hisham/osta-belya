@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.ostabelya.R;
 import com.example.ostabelya.activities.CreateOrder;
+import com.example.ostabelya.activities.DetailedPaymentRequest;
 import com.example.ostabelya.firebase.FirebaseUtils;
 import com.example.ostabelya.models.Order;
 import kotlin.Unit;
@@ -51,8 +52,10 @@ public class PaymentRequestAdapter extends RecyclerView.Adapter<PaymentRequestAd
             @Override
             public void onClick(View v) {
                 Context cont = v.getContext();
-                Intent intent = new Intent(cont, CreateOrder.class);
+                Intent intent = new Intent(cont, DetailedPaymentRequest.class);
                 intent.putExtra("MECHANIC_ID", paymentRequests.get(i).mid);
+                intent.putExtra("MONEY", paymentRequests.get(i).moneyAmount);
+                intent.putExtra("DATE", paymentRequests.get(i).date);
                 cont.startActivity(intent);
             }
         });
