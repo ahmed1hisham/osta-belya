@@ -22,7 +22,7 @@ class EmalaActivity : AppCompatActivity() {
         }
 
         recycler_view.apply {
-            layoutManager = GridLayoutManager(this@EmalaActivity, 2)
+            layoutManager = LinearLayoutManager(this@EmalaActivity)
             adapter = EmalaAdapter(workers)
         }
 
