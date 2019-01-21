@@ -3,6 +3,7 @@ package com.example.ostabelya.firebase
 import com.example.ostabelya.models.Mechanic
 import com.example.ostabelya.models.Transaction
 import com.example.ostabelya.models.Request
+import com.example.ostabelya.models.Worker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -86,6 +87,24 @@ class FirebaseUtils {
                             payments.add(payment.getValue(Transaction::class.java)!!);
                         }
                         onSuccess(payments)
+                    }
+                })
+        }
+        fun getMechanicWorkers(onSuccess: (ArrayList<Worker>) -> Unit, onFailure: () -> Unit) {
+
+            firebaseDatabase.reference.child("mechanic").child("100").child("workers")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val workers = ArrayList<Worker>();
+                        //println("Ay 7AGA " + dataSnapshot.getValue())
+                        for (req in dataSnapshot.children){
+                            //println("Ay 7aga" + req.getValue())
+                            workers.add(req.getValue(Worker::class.java)!!)
+                        }
+                    onSuccess(workers)
                     }
                 })
         }
