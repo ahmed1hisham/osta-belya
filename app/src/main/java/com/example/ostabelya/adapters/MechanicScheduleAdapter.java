@@ -13,14 +13,15 @@ import android.widget.Toast;
 import com.example.ostabelya.R;
 import com.example.ostabelya.activities.CreateOrder;
 import com.example.ostabelya.activities.MechanicSchedule;
+import com.example.ostabelya.firebase.FirebaseUtils;
 import com.example.ostabelya.models.Request;
+import kotlin.Unit;
 
 import java.util.List;
 
 public class MechanicScheduleAdapter extends RecyclerView.Adapter<MechanicScheduleAdapter.ViewHolder>{
 @NonNull
 List<Request> requests;
-int uidCurrent;
 
 
     public MechanicScheduleAdapter(@NonNull List<Request> requests) {
@@ -47,9 +48,14 @@ public void onBindViewHolder(@NonNull MechanicScheduleAdapter.ViewHolder viewHol
                     cont.startActivity(intent);
                 }
             });
+    FirebaseUtils.Companion.getCustomerByUid(requests.get(i).uid, (cs)->{
+        viewHolder.customerName.setText(cs.username);
+        viewHolder.slot.setText(requests.get(i).requestSlot);
+        return Unit.INSTANCE;
+    }, () -> {
+       return Unit.INSTANCE;
+    });
 
-            viewHolder.customerName.setText(requests.get(i).uid + "");
-            viewHolder.slot.setText(requests.get(i).requestSlot);
 
         }
 
