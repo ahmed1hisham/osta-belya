@@ -7,11 +7,13 @@ public class Customer {
     public String username;
     public int age;
     public double wallet;
-    public int phoneNumber;
+    public String phoneNumber;
     public ArrayList<Request> requests;
 
+    public Customer() {
+    }
 
-    public Customer(int uid, String username, int age, double wallet, int phoneNumber){
+    public Customer(int uid, String username, int age, double wallet, String phoneNumber){
          this.uid = uid;
          this.username = username;
          this.age = age;
