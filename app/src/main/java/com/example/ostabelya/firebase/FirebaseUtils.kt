@@ -179,5 +179,22 @@ class FirebaseUtils {
                     }
                 })
         }
+
+        fun getMechanics(onSuccess: (ArrayList<Mechanic>) -> Unit, onFailure: () -> Unit) {
+
+            firebaseDatabase.reference.child("mechanic")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val mechanics = ArrayList<Mechanic>();
+                        for (mecha in dataSnapshot.children){
+                            mechanics.add(mecha.getValue(Mechanic::class.java)!!);
+                        }
+                        onSuccess(mechanics)
+                    }
+                })
+        }
     }
 }
