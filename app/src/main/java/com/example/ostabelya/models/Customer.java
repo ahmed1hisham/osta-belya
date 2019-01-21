@@ -3,15 +3,17 @@ package com.example.ostabelya.models;
 import java.util.ArrayList;
 
 public class Customer {
-    public int uid;
+    public String uid;
     public String username;
     public int age;
     public double wallet;
-    public int phoneNumber;
+    public String phoneNumber;
     public ArrayList<Request> requests;
 
+    public Customer() {
+    }
 
-    public Customer(int uid, String username, int age, double wallet, int phoneNumber){
+    public Customer(String uid, String username, int age, double wallet, String phoneNumber){
          this.uid = uid;
          this.username = username;
          this.age = age;

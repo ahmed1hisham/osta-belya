@@ -1,9 +1,7 @@
 package com.example.ostabelya.firebase
 
-import com.example.ostabelya.models.Customer
 import com.example.ostabelya.models.*
 import com.google.firebase.auth.FirebaseAuth
-import com.example.ostabelya.models.Worker
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -90,7 +88,7 @@ class FirebaseUtils {
                 })
         }
 
-        fun getCustomerByUid (uid: Int, onSuccess: (Customer) -> Unit, onFailure: () -> Unit){
+        fun getCustomerByUid (uid: String,onSuccess: (Customer) -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("customer").addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     onFailure()
@@ -107,7 +105,7 @@ class FirebaseUtils {
             })
         }
 
-        fun getMechanicByUid (mid: Int,onSuccess: (Mechanic) -> Unit, onFailure: () -> Unit){
+        fun getMechanicByUid (mid: String, onSuccess: (Mechanic) -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("mechanic").addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     onFailure()
@@ -121,6 +119,33 @@ class FirebaseUtils {
                     }
 
                 }
+            })
+        }
+
+
+        fun addOrderToMechanic(order: Order, onSuccess: () -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("mechanic")
+                .child(firebaseAuth.currentUser!!.uid)
+                .child("orders").child(order.orderID).setValue(order)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        onSuccess()
+                    } else if (!it.isSuccessful) {
+                        onFailure()
+                    }
+                }
+        }
+
+        fun getCurrentAuthMechanic(onSuccess: (String) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child(firebaseAuth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    onFailure()
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    onSuccess(firebaseAuth.currentUser!!.uid);
+                }
+
             })
         }
 

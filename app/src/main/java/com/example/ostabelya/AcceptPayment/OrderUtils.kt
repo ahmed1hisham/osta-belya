@@ -42,7 +42,7 @@ class OrderUtils{
             orderRequest.amountCents = amount
             orderRequest.merchantOrderId = merchantOrderId
 
-            val orderRequestAsJson = jacksonObjectMapper().writeValueAsBytes(orderRequest)
+            val orderRequestAsJson = jacksonObjectMapper().writeValueAsString(orderRequest)
 
             val body = RequestBody.create(JSON, orderRequestAsJson)
             val request = Request.Builder()
@@ -58,6 +58,51 @@ class OrderUtils{
                 override fun onResponse(call: Call, response: Response) {
                     val orderResponseJson = response.body()!!.string()
                     onResponse(orderResponseJson)
+                }
+            })
+        }
+
+        fun getPaymentKey(authToken: String, amount: String, orderId: String, walletId: String, onResponse: (paymentKeyResponseAsJson: String) -> Unit) {
+            val getPaymentKeyJson = "{\n" +
+                    "  \"auth_token\": \"$authToken\", \n" +
+                    "  \"amount_cents\": \"$amount\", \n" +
+                    "  \"expiration\": 36000, \n" +
+                    "  \"order_id\": \"$orderId\",   \n" +
+                    "  \"currency\": \"EGP\", \n" +
+                    "  \"integration_id\": $walletId ,\n" +
+                    "  \"lock_order_when_paid\": \"false\" ,\n" +
+                    "\t\"billing_data\": {\n" +
+                    "    \"apartment\": \"NA\", \n" +
+                    "    \"email\": \"mohd.hussayn@gmail.com\", \n" +
+                    "    \"floor\": \"NA\", \n" +
+                    "    \"first_name\": \"Mohamed\", \n" +
+                    "    \"street\": \"NA\", \n" +
+                    "    \"building\": \"NA\", \n" +
+                    "    \"phone_number\": \"+201123666937\", \n" +
+                    "    \"shipping_method\": \"NA\", \n" +
+                    "    \"postal_code\": \"NA\", \n" +
+                    "    \"city\": \"Cairo\", \n" +
+                    "    \"country\": \"NA\", \n" +
+                    "    \"last_name\": \"Hussein\", \n" +
+                    "    \"state\": \"NA\"\n" +
+                    "  }\n" +
+                    "}"
+
+
+            val body = RequestBody.create(JSON, getPaymentKeyJson)
+            val request = Request.Builder()
+                .url("https://accept.paymobsolutions.com/api/acceptance/payment_keys")
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object: Callback{
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val paymentKeyResponseJson = response.body()!!.string()
+                    onResponse(paymentKeyResponseJson)
                 }
             })
         }
