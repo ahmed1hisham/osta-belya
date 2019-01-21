@@ -136,6 +136,17 @@ class FirebaseUtils {
                 }
         }
 
+        fun addPaymentRequestToCustomer(order: Order,uid: String, onSuccess: () -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child(uid).child("paymentRequests").child(order.orderID)
+                .setValue(order).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        onSuccess()
+                    } else if (!it.isSuccessful) {
+                        onFailure()
+                    }
+                }
+        }
+
         fun getCurrentAuthMechanic(onSuccess: (String) -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child(firebaseAuth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
