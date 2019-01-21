@@ -42,7 +42,18 @@ public class CreateOrder extends AppCompatActivity {
     public void createOrderInFirebase(String paymentToken, String orderId, int money) {
         FirebaseUtils.Companion.getCurrentAuthMechanic((mid)->{
             Order order = new Order(orderId, mid, getIntent().getStringExtra("EXTRA_SESSION_ID"),paymentToken, money, new Date().toString());
+            String uid = getIntent().getStringExtra("EXTRA_SESSION_ID");
+            Order order = new Order(UUID.randomUUID().toString(), mid, uid, token, money, orderDate.toString());
+
             FirebaseUtils.Companion.addOrderToMechanic(order,() -> {
+                Toast.makeText(CreateOrder.this, "Order Added", Toast.LENGTH_SHORT).show();
+                return Unit.INSTANCE;
+            }, () ->{
+                Toast.makeText(CreateOrder.this, "Try Again", Toast.LENGTH_SHORT).show();
+                return Unit.INSTANCE;
+            });
+
+            FirebaseUtils.Companion.addPaymentRequestToCustomer(order,uid, ()->{
                 Toast.makeText(CreateOrder.this, "Order Added", Toast.LENGTH_SHORT).show();
                 return Unit.INSTANCE;
             }, () ->{

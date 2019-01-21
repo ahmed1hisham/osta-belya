@@ -136,6 +136,17 @@ class FirebaseUtils {
                 }
         }
 
+        fun addPaymentRequestToCustomer(order: Order,uid: String, onSuccess: () -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child(uid).child("paymentRequests").child(order.orderID)
+                .setValue(order).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        onSuccess()
+                    } else if (!it.isSuccessful) {
+                        onFailure()
+                    }
+                }
+        }
+
         fun getCurrentAuthMechanic(onSuccess: (String) -> Unit, onFailure: () -> Unit){
 //            firebaseDatabase.reference.child(firebaseAuth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
 //                override fun onCancelled(p0: DatabaseError) {
@@ -150,6 +161,60 @@ class FirebaseUtils {
             onSuccess("100")
         }
 
+
+        fun getMechanicWorkers(onSuccess: (ArrayList<Worker>) -> Unit, onFailure: () -> Unit) {
+
+            firebaseDatabase.reference.child("mechanic").child("100").child("workers")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val workers = ArrayList<Worker>();
+                        //println("Ay 7AGA " + dataSnapshot.getValue())
+                        for (req in dataSnapshot.children){
+                            //println("Ay 7aga" + req.getValue())
+                            workers.add(req.getValue(Worker::class.java)!!)
+                        }
+                    onSuccess(workers)
+                    }
+                })
+        }
+
+        fun getMechanics(onSuccess: (ArrayList<Mechanic>) -> Unit, onFailure: () -> Unit) {
+
+            firebaseDatabase.reference.child("mechanic")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val mechanics = ArrayList<Mechanic>();
+                        for (mecha in dataSnapshot.children){
+                            mechanics.add(mecha.getValue(Mechanic::class.java)!!);
+                        }
+                        onSuccess(mechanics)
+                    }
+                })
+        }
+
+        fun getCustomerPaymentRequests(onSuccess: (ArrayList<Order>) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child("100").child("paymentRequests")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val paymentRequests = ArrayList<Order>();
+                        for (req in dataSnapshot.children){
+                            paymentRequests.add(req.getValue(Order::class.java)!!)
+                        }
+                        onSuccess(paymentRequests)
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+
+                })
+        }
 
     }
 }
