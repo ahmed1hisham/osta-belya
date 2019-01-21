@@ -17,4 +17,7 @@ public class Order {
         this.date = date;
         this.orderID = orderId;
     }
+
+    public Order() {
+    }
 }

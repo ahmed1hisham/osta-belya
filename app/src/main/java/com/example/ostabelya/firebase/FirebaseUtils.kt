@@ -179,5 +179,41 @@ class FirebaseUtils {
                     }
                 })
         }
+
+        fun getMechanics(onSuccess: (ArrayList<Mechanic>) -> Unit, onFailure: () -> Unit) {
+
+            firebaseDatabase.reference.child("mechanic")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val mechanics = ArrayList<Mechanic>();
+                        for (mecha in dataSnapshot.children){
+                            mechanics.add(mecha.getValue(Mechanic::class.java)!!);
+                        }
+                        onSuccess(mechanics)
+                    }
+                })
+        }
+
+        fun getCustomerPaymentRequests(onSuccess: (ArrayList<Order>) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child("100").child("paymentRequests")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val paymentRequests = ArrayList<Order>();
+                        for (req in dataSnapshot.children){
+                            paymentRequests.add(req.getValue(Order::class.java)!!)
+                        }
+                        onSuccess(paymentRequests)
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+
+                })
+        }
+
     }
 }

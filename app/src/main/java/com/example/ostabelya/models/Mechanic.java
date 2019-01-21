@@ -10,6 +10,10 @@ public class Mechanic {
     public String apiKey;
     public int walletId;
     public String name;
+    public String description;
+    public int rating;
+    public int waitingTime;
+    public int categoryy;
     public int age;
     public String location;
     public double wallet;
@@ -17,7 +21,8 @@ public class Mechanic {
     public ArrayList<Transaction> transactions;
     public Map<String, Order> orders;
     public Map<String, Worker> workers;
-    public Mechanic(String uid, int mAcceptid,String apiKey, String name, int age, String location, double wallet){
+    public Mechanic(String uid, int mAcceptid,String apiKey, String name, int age, String location, double wallet,
+                    int rating, int waitingTime, int categoryy){
         this.mid= uid;
         this.name = name;
         this.age = age;
@@ -28,5 +33,12 @@ public class Mechanic {
         transactions = new ArrayList<Transaction>();
         orders = new HashMap<String, Order>();
         workers = new HashMap<String, Worker>();
+        this.rating = rating;
+        this.waitingTime = waitingTime;
+        this.categoryy = categoryy;
+
+    }
+    public Mechanic(){
+
     }
 }
