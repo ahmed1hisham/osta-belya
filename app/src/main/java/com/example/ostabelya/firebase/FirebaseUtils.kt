@@ -1,5 +1,6 @@
 package com.example.ostabelya.firebase
 
+import com.example.ostabelya.models.Customer
 import com.example.ostabelya.models.Mechanic
 import com.example.ostabelya.models.Transaction
 import com.example.ostabelya.models.Request
@@ -89,5 +90,41 @@ class FirebaseUtils {
                     }
                 })
         }
+
+        fun getCustomerByUid (uid: Int,onSuccess: (Customer) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    onFailure()
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (customer in dataSnapshot.children){
+                        if(customer.key!!.equals(uid)){
+                            onSuccess(customer.getValue(Customer::class.java)!!);
+                        }
+                    }
+
+                }
+            })
+        }
+
+        fun getMechanicByUid (mid: Int,onSuccess: (Mechanic) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("mechanic").addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    onFailure()
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (customer in dataSnapshot.children){
+                        if(customer.key!!.equals(mid)){
+                            onSuccess(customer.getValue(Mechanic::class.java)!!);
+                        }
+                    }
+
+                }
+            })
+        }
+
+
     }
 }
