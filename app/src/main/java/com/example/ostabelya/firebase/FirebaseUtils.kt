@@ -1,6 +1,7 @@
 package com.example.ostabelya.firebase
 
 import com.example.ostabelya.models.Mechanic
+import com.example.ostabelya.models.Payment
 import com.example.ostabelya.models.Request
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -63,14 +64,29 @@ class FirebaseUtils {
                         onFailure()
                     }
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val pickUpRequests = arrayListOf<PickupRequest>();
+                        val pickUpRequests = arrayListOf<Request>();
                         for (request in dataSnapshot.children){
-                            pickUpRequests.add(request.getValue(PickupRequest::class.java)!!);
+                            pickUpRequests.add(request.getValue(Request::class.java)!!);
                         }
                         onSuccess(pickUpRequests)
                     }
                 })
         }
 
+        fun getMechanicPayments(onSuccess: (ArrayList<Payment>) -> Unit, onFailure: () -> Unit) {
+            firebaseDatabase.reference.child("mechanic").child(firebaseAuth.currentUser!!.uid).child("payments")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val pickUpRequests = arrayListOf<Payment>();
+                        for (request in dataSnapshot.children){
+                            pickUpRequests.add(request.getValue(Payment::class.java)!!);
+                        }
+                        onSuccess(pickUpRequests)
+                    }
+                })
+        }
     }
 }
