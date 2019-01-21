@@ -1,16 +1,13 @@
 package com.example.ostabelya.firebase
 
-import android.util.Log
 import com.example.ostabelya.models.Mechanic
-import com.example.ostabelya.models.Payment
+import com.example.ostabelya.models.Transaction
 import com.example.ostabelya.models.Request
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlin.math.log
-import kotlin.math.log10
 
 
 class FirebaseUtils {
@@ -35,8 +32,8 @@ class FirebaseUtils {
         fun createMerchantInDatabase(user: Mechanic,
                                  onSuccess: () -> Unit,
                                  onFailure: (errorMessage: String) -> Unit) {
-            firebaseDatabase.reference.child("Mechanic")
-                .child(user.uid).setValue(user)
+            firebaseDatabase.reference.child("mechanic")
+                .child(user.mid.toString()).setValue(user)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         onSuccess()
@@ -76,16 +73,17 @@ class FirebaseUtils {
                 })
         }
 
-        fun getMechanicPayments(onSuccess: (ArrayList<Payment>) -> Unit, onFailure: () -> Unit) {
-            firebaseDatabase.reference.child("mechanic").child("100").child("payments")
+        fun getMechanicPayments(onSuccess: (ArrayList<Transaction>) -> Unit, onFailure: () -> Unit) {
+            firebaseDatabase.reference.child("mechanic").child("100").child("transactions")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         onFailure()
                     }
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val payments = ArrayList<Payment>();
+                        val payments = ArrayList<Transaction>();
                         for (payment in dataSnapshot.children){
-                            payments.add(payment.getValue(Payment::class.java)!!);
+                            //println(payment.getValue())
+                            payments.add(payment.getValue(Transaction::class.java)!!);
                         }
                         onSuccess(payments)
                     }

@@ -8,13 +8,13 @@ import android.widget.Toast;
 import com.example.ostabelya.R;
 import com.example.ostabelya.adapters.MechanicPaymentsAdapter;
 import com.example.ostabelya.firebase.FirebaseUtils;
-import com.example.ostabelya.models.Payment;
+import com.example.ostabelya.models.Transaction;
 import kotlin.Unit;
 
 import java.util.ArrayList;
 
 public class MechanicWalletActivity extends AppCompatActivity {
-    private ArrayList<Payment> payments;
+    private ArrayList<Transaction> transactions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +25,8 @@ public class MechanicWalletActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseUtils.Companion.getMechanicPayments((payments) -> {
-            this.payments = payments;
-            MechanicPaymentsAdapter pickUpRequestItemAdapter = new MechanicPaymentsAdapter(this.payments);
+            this.transactions = payments;
+            MechanicPaymentsAdapter pickUpRequestItemAdapter = new MechanicPaymentsAdapter(this.transactions);
             recyclerView.setAdapter(pickUpRequestItemAdapter);
             return Unit.INSTANCE;
         }, () -> {
