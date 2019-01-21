@@ -58,17 +58,17 @@ class FirebaseUtils {
 
         fun getMerchantRequests(onSuccess: (ArrayList<Request>) -> Unit, onFailure: () -> Unit) {
 
-            firebaseDatabase.reference.child("request").child("100").child("requests")
+            firebaseDatabase.reference.child("mechanic").child("100").child("requests")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         onFailure()
                     }
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val pickUpRequests = arrayListOf<Request>();
-                        for (request in dataSnapshot.children){
-                            pickUpRequests.add(request.getValue(Request::class.java)!!);
+                        val requests = ArrayList<Request>();
+                        for (req in dataSnapshot.children){
+                            requests.add(req.getValue(Request::class.java)!!);
                         }
-                        onSuccess(pickUpRequests)
+                        onSuccess(requests)
                     }
                 })
         }

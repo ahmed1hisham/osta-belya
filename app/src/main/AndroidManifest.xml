@@ -16,6 +16,9 @@
         <activity android:name=".activities.MechanicHome">
         </activity>
         <activity android:name=".activities.MechanicWalletActivity">
+
+        </activity>
+        <activity android:name=".activities.MechanicSchedule">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
