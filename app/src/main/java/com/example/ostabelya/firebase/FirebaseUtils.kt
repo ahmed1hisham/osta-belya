@@ -1,10 +1,9 @@
 package com.example.ostabelya.firebase
 
-import com.example.ostabelya.models.Mechanic
-import com.example.ostabelya.models.Transaction
-import com.example.ostabelya.models.Request
-import com.example.ostabelya.models.Worker
+import com.example.ostabelya.models.Customer
+import com.example.ostabelya.models.*
 import com.google.firebase.auth.FirebaseAuth
+import com.example.ostabelya.models.Worker
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -90,6 +89,42 @@ class FirebaseUtils {
                     }
                 })
         }
+
+        fun getCustomerByUid (uid: Int, onSuccess: (Customer) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    onFailure()
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (customer in dataSnapshot.children){
+                        if(customer.key!!.equals(uid)){
+                            onSuccess(customer.getValue(Customer::class.java)!!);
+                        }
+                    }
+
+                }
+            })
+        }
+
+        fun getMechanicByUid (mid: Int,onSuccess: (Mechanic) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("mechanic").addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    onFailure()
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (customer in dataSnapshot.children){
+                        if(customer.key!!.equals(mid)){
+                            onSuccess(customer.getValue(Mechanic::class.java)!!);
+                        }
+                    }
+
+                }
+            })
+        }
+
+
         fun getMechanicWorkers(onSuccess: (ArrayList<Worker>) -> Unit, onFailure: () -> Unit) {
 
             firebaseDatabase.reference.child("mechanic").child("100").child("workers")
