@@ -28,7 +28,7 @@ public class CreateOrder extends AppCompatActivity {
         Date orderDate = new Date();
         String token = "Token ya HUSSIEEN";
         FirebaseUtils.Companion.getCurrentAuthMechanic((mid)->{
-            Order order = new Order("hsbhds", mid, getIntent().getIntExtra("EXTRA_SESSION_ID",0),token, money, orderDate.toString());
+            Order order = new Order("hsbhds", mid, getIntent().getStringExtra("EXTRA_SESSION_ID"),token, money, orderDate.toString());
             FirebaseUtils.Companion.addOrderToMechanic(order,() -> {
                 Toast.makeText(CreateOrder.this, "Order Added", Toast.LENGTH_SHORT).show();
                 return Unit.INSTANCE;

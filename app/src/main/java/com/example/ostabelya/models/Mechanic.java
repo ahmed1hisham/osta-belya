@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Mechanic {
-    public int mid;
+    public String mid;
+    public int mAcceptid;
     public String apiKey;
     public int walletId;
     public String name;
@@ -16,12 +17,13 @@ public class Mechanic {
     public ArrayList<Transaction> transactions;
     public Map<String, Order> orders;
     public Map<String, Worker> workers;
-    public Mechanic(int uid, String apiKey, String name, int age, String location, double wallet){
+    public Mechanic(String uid, int mAcceptid,String apiKey, String name, int age, String location, double wallet){
         this.mid= uid;
         this.name = name;
         this.age = age;
         this.location = location;
         this.wallet = wallet;
+        this.mAcceptid = mAcceptid;
         requests = new ArrayList<Request>();
         transactions = new ArrayList<Transaction>();
         orders = new HashMap<String, Order>();

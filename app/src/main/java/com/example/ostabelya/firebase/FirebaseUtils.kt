@@ -88,8 +88,7 @@ class FirebaseUtils {
                 })
         }
 
-        fun getCustomerByUid (uid: Int,onSuccess: (Customer) -> Unit, onFailure: () -> Unit){
-            println("anageeet");
+        fun getCustomerByUid (uid: String,onSuccess: (Customer) -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("customer").addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     onFailure()
@@ -97,7 +96,7 @@ class FirebaseUtils {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (customer in dataSnapshot.children){
-                        if(customer.key!!.equals(uid.toString())){
+                        if(customer.key!!.equals(uid)){
                             onSuccess(customer.getValue(Customer::class.java)!!);
                         }
                     }
@@ -106,7 +105,7 @@ class FirebaseUtils {
             })
         }
 
-        fun getMechanicByUid (mid: Int,onSuccess: (Mechanic) -> Unit, onFailure: () -> Unit){
+        fun getMechanicByUid (mid: String, onSuccess: (Mechanic) -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("mechanic").addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     onFailure()
@@ -137,14 +136,14 @@ class FirebaseUtils {
                 }
         }
 
-        fun getCurrentAuthMechanic(onSuccess: (Int) -> Unit, onFailure: () -> Unit){
+        fun getCurrentAuthMechanic(onSuccess: (String) -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child(firebaseAuth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     onFailure()
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    onSuccess(Integer.parseInt(firebaseAuth.currentUser!!.uid));
+                    onSuccess(firebaseAuth.currentUser!!.uid);
                 }
 
             })
