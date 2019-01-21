@@ -18,5 +18,6 @@ public class Mechanic {
         this.location = location;
         this.wallet = wallet;
         requests = new ArrayList<Request>();
+        payments = new ArrayList<Payment>();
     }
 }

@@ -19,5 +19,6 @@ public class Customer {
          this.phoneNumber = phoneNumber;
          this.requests = new ArrayList<Request>();
     }
+
 }
 

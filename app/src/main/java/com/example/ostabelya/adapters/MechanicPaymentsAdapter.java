@@ -1,6 +1,7 @@
 package com.example.ostabelya.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,14 +16,23 @@ public class MechanicPaymentsAdapter extends RecyclerView.Adapter<MechanicPaymen
 @NonNull
 List<Payment> payments;
 
-@Override
+    public MechanicPaymentsAdapter(@NonNull List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    @Override
 public MechanicPaymentsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,int i){
-        return null;
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.payment_item, viewGroup, false);
+
+        return new ViewHolder(view);
         }
 
 @Override
 public void onBindViewHolder(@NonNull MechanicPaymentsAdapter.ViewHolder viewHolder,int i){
-
+            viewHolder.customerName.setText(payments.get(i).customer.username);
+            viewHolder.moneyAmount.setText(payments.get(i).moneyAmount+"");
+            viewHolder.date.setText(payments.get(i).date);
         }
 
 @Override
