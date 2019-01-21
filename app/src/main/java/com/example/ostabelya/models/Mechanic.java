@@ -17,8 +17,12 @@ public class Mechanic {
     public ArrayList<Transaction> transactions;
     public Map<String, Order> orders;
     public Map<String, Worker> workers;
-    public Mechanic(String uid, int mAcceptid,String apiKey, String name, int age, String location, double wallet){
-        this.mid= uid;
+
+    public Mechanic() {
+    }
+
+    public Mechanic(String mid, int mAcceptid, String apiKey, String name, int age, String location, double wallet){
+        this.mid= mid;
         this.name = name;
         this.age = age;
         this.location = location;

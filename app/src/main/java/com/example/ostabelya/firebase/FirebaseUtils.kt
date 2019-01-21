@@ -114,6 +114,7 @@ class FirebaseUtils {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (customer in dataSnapshot.children){
                         if(customer.key!!.equals(mid)){
+                            println(customer.getValue())
                             onSuccess(customer.getValue(Mechanic::class.java)!!);
                         }
                     }
@@ -170,14 +171,31 @@ class FirebaseUtils {
                     }
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val workers = ArrayList<Worker>();
-                        //println("Ay 7AGA " + dataSnapshot.getValue())
                         for (req in dataSnapshot.children){
-                            //println("Ay 7aga" + req.getValue())
                             workers.add(req.getValue(Worker::class.java)!!)
                         }
                     onSuccess(workers)
                     }
                 })
         }
+
+        fun getCustomerPaymentRequests(onSuccess: (ArrayList<Order>) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child("100").child("paymentRequests")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val paymentRequests = ArrayList<Order>();
+                        for (req in dataSnapshot.children){
+                            paymentRequests.add(req.getValue(Order::class.java)!!)
+                        }
+                        onSuccess(paymentRequests)
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+
+                })
+        }
+
     }
 }
