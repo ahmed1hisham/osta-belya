@@ -1,17 +1,20 @@
 package com.example.ostabelya.models;
 
 public class Request {
-    private Customer user;
-    private Mechanic mechanic;
-    private String requestDate;
-    private String requestSlot;
-    private String status;
+    public int uid;
+    public int mid;
+    public String requestDate;
+    public String requestSlot;
+    public String status;
 
-    public Request(Customer customer, Mechanic mechanic, String requestDate, String requestSlot, String status){
-        this.user = customer;
-        this.mechanic = mechanic;
+    public Request(int uid, int mid, String requestDate, String requestSlot, String status){
+        this.uid = uid;
+        this.mid = mid;
         this.requestDate = requestDate;
         this.requestSlot = requestSlot;
         this.status = status;
+    }
+    public Request(){
+
     }
 }

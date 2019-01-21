@@ -7,17 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.ostabelya.R;
-import com.example.ostabelya.models.Payment;
+import com.example.ostabelya.models.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MechanicPaymentsAdapter extends RecyclerView.Adapter<MechanicPaymentsAdapter.ViewHolder>{
 @NonNull
-List<Payment> payments;
+List<Transaction> transactions;
 
-    public MechanicPaymentsAdapter(@NonNull List<Payment> payments) {
-        this.payments = payments;
+    public MechanicPaymentsAdapter(@NonNull List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     @Override
@@ -30,14 +29,14 @@ public MechanicPaymentsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup 
 
 @Override
 public void onBindViewHolder(@NonNull MechanicPaymentsAdapter.ViewHolder viewHolder,int i){
-            viewHolder.customerName.setText(payments.get(i).customer.username);
-            viewHolder.moneyAmount.setText(payments.get(i).moneyAmount+"");
-            viewHolder.date.setText(payments.get(i).date);
+            viewHolder.customerName.setText(transactions.get(i).userName);
+            viewHolder.moneyAmount.setText(transactions.get(i).moneyAmount+"");
+            viewHolder.date.setText(transactions.get(i).date);
         }
 
 @Override
 public int getItemCount(){
-        return payments.size();
+        return transactions.size();
         }
 
 
