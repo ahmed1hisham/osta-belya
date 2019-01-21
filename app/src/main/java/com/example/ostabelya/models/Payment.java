@@ -1,17 +1,17 @@
 package com.example.ostabelya.models;
 
 public class Payment {
-    public Customer customer;
-    public Mechanic mechanic;
+    public String uid;
+    public int mid;
     public double moneyAmount;
     public String date;
 
     public Payment() {
     }
 
-    public Payment(Customer customer, Mechanic mechanic, double moneyAmount, String date) {
-        this.customer = customer;
-        this.mechanic = mechanic;
+    public Payment(String uid, int mid, double moneyAmount, String date) {
+        this.uid = uid;
+        this.mid = mid;
         this.moneyAmount = moneyAmount;
         this.date = date;
     }
