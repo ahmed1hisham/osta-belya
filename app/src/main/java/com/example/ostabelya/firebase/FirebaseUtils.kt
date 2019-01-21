@@ -196,5 +196,24 @@ class FirebaseUtils {
                     }
                 })
         }
+
+        fun getCustomerPaymentRequests(onSuccess: (ArrayList<Order>) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child("100").child("paymentRequests")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val paymentRequests = ArrayList<Order>();
+                        for (req in dataSnapshot.children){
+                            paymentRequests.add(req.getValue(Order::class.java)!!)
+                        }
+                        onSuccess(paymentRequests)
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+
+                })
+        }
+
     }
 }

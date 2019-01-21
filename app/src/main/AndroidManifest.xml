@@ -16,6 +16,8 @@
         <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.MechanicSchedule">
+        </activity>
+        <activity android:name=".activities.PaymentRequests">
 
         </activity>
         <activity android:name=".activities.MechanicHome">

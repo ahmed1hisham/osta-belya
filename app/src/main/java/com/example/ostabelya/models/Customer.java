@@ -24,7 +24,6 @@ public class Customer {
          this.phoneNumber = phoneNumber;
          this.requests = new ArrayList<Request>();
          this.paymentRequests = new HashMap<String, Order>();
-
     }
 
 }
