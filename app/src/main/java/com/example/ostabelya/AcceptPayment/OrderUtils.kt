@@ -1,6 +1,8 @@
 package com.example.ostabelya.AcceptPayment
 
+import android.util.Log
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import okhttp3.*
 import java.io.IOException
 
@@ -29,7 +31,8 @@ class OrderUtils{
 
                 override fun onResponse(call: Call, response: Response) {
                     val authTokenJson = response.body()!!.string()
-                    onResponse(authTokenJson)
+                    val authTokenResponse = jacksonObjectMapper().readValue<AuthTokenModel>(authTokenJson)
+                    onResponse(authTokenResponse.token)
                 }
             })
         }
@@ -43,6 +46,7 @@ class OrderUtils{
             orderRequest.merchantOrderId = merchantOrderId
 
             val orderRequestAsJson = jacksonObjectMapper().writeValueAsString(orderRequest)
+            Log.e("orderRequestJson", orderRequestAsJson)
 
             val body = RequestBody.create(JSON, orderRequestAsJson)
             val request = Request.Builder()
@@ -57,7 +61,9 @@ class OrderUtils{
 
                 override fun onResponse(call: Call, response: Response) {
                     val orderResponseJson = response.body()!!.string()
-                    onResponse(orderResponseJson)
+                    val orderResponse = jacksonObjectMapper().readValue<OrderResponse>(orderResponseJson)
+                    Log.e("orderResponseJson", orderResponseJson)
+                    onResponse(orderResponse.id.toString())
                 }
             })
         }
@@ -96,13 +102,12 @@ class OrderUtils{
                 .build()
 
             client.newCall(request).enqueue(object: Callback{
-                override fun onFailure(call: Call, e: IOException) {
-
-                }
+                override fun onFailure(call: Call, e: IOException) {}
 
                 override fun onResponse(call: Call, response: Response) {
                     val paymentKeyResponseJson = response.body()!!.string()
-                    onResponse(paymentKeyResponseJson)
+                    val paymentKeyResponse = jacksonObjectMapper().readValue<PaymentKeyResponse>(paymentKeyResponseJson)
+                    onResponse(paymentKeyResponse.token)
                 }
             })
         }

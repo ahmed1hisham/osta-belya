@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
@@ -46,6 +51,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.4.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.4.1'
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7"
+
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
