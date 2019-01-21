@@ -45,7 +45,6 @@ public void onBindViewHolder(@NonNull MechanicScheduleAdapter.ViewHolder viewHol
                     Intent intent = new Intent(cont, CreateOrder.class);
                     intent.putExtra("EXTRA_SESSION_ID", requests.get(i).uid);
                     cont.startActivity(intent);
-                    System.out.println();
                 }
             });
 
