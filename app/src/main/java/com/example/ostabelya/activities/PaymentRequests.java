@@ -19,6 +19,8 @@ public class PaymentRequests extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_requests);
+
+
         RecyclerView paymentRequestsRecyclerView = (RecyclerView)findViewById(R.id.paymentRequestsRecyclerView);
         paymentRequestsRecyclerView.setHasFixedSize(true);
         paymentRequestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));

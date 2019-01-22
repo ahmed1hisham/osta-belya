@@ -14,6 +14,7 @@ android:background="@drawable/img_background_res">
             android:layout_marginLeft="220dp"
             android:layout_marginTop="113dp"
             android:id="@+id/button"
+            android:onClick="scheduleButtonPressed"
             android:background="@drawable/calendar"/>
 
     <android.support.v7.widget.AppCompatTextView android:layout_width="51dp" android:layout_height="24dp"
@@ -28,6 +29,7 @@ android:background="@drawable/img_background_res">
             android:layout_marginLeft="15dp"
             android:layout_marginTop="222dp"
             android:id="@+id/button2"
+            android:onClick="workersButtonPressed"
             android:background="@drawable/amala"/>
 
     <android.support.v7.widget.AppCompatTextView android:layout_width="51dp" android:layout_height="24dp"

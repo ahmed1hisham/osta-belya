@@ -40,6 +40,19 @@ class FirebaseUtils {
                     }
                 }
         }
+        fun createUserInDatabase(user: Customer,
+                                 onSuccess: () -> Unit,
+                                 onFailure: (errorMessage: String) -> Unit) {
+            firebaseDatabase.reference.child("customer")
+                .child(user.uid).setValue(user)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        onSuccess()
+                    } else if (!it.isSuccessful) {
+                        onFailure(it.exception!!.localizedMessage)
+                    }
+                }
+        }
 
         fun signInWithEmailAndPassword(email: String, password: String,
                                        onSuccess: () -> Unit,
@@ -56,7 +69,7 @@ class FirebaseUtils {
 
         fun getMerchantRequests(onSuccess: (ArrayList<Request>) -> Unit, onFailure: () -> Unit) {
 
-            firebaseDatabase.reference.child("mechanic").child("100").child("requests")
+            firebaseDatabase.reference.child("mechanic").child(firebaseAuth.currentUser!!.uid).child("requests")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         onFailure()
@@ -72,7 +85,7 @@ class FirebaseUtils {
         }
 
         fun getMechanicPayments(onSuccess: (ArrayList<Transaction>) -> Unit, onFailure: () -> Unit) {
-            firebaseDatabase.reference.child("mechanic").child("100").child("transactions")
+            firebaseDatabase.reference.child("mechanic").child(firebaseAuth.currentUser!!.uid).child("transactions")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         onFailure()
@@ -163,7 +176,7 @@ class FirebaseUtils {
 
         fun getMechanicWorkers(onSuccess: (ArrayList<Worker>) -> Unit, onFailure: () -> Unit) {
 
-            firebaseDatabase.reference.child("mechanic").child("100").child("workers")
+            firebaseDatabase.reference.child("mechanic").child(firebaseAuth.currentUser!!.uid).child("workers")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         onFailure()
@@ -198,7 +211,7 @@ class FirebaseUtils {
         }
 
         fun getCustomerPaymentRequests(onSuccess: (ArrayList<Order>) -> Unit, onFailure: () -> Unit){
-            firebaseDatabase.reference.child("customer").child("100").child("paymentRequests")
+            firebaseDatabase.reference.child("customer").child(firebaseAuth.currentUser!!.uid).child("paymentRequests")
                 .addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val paymentRequests = ArrayList<Order>();
@@ -214,6 +227,9 @@ class FirebaseUtils {
 
                 })
         }
+
+
+
 
     }
 }

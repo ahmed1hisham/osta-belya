@@ -17,7 +17,7 @@ public class Mechanic {
     public int age;
     public String location;
     public double wallet;
-    public ArrayList<Request> requests;
+    public Map<String,Request> requests;
     public ArrayList<Transaction> transactions;
     public Map<String, Order> orders;
     public Map<String, Worker> workers;
@@ -29,7 +29,7 @@ public class Mechanic {
         this.location = location;
         this.wallet = wallet;
         this.mAcceptid = mAcceptid;
-        requests = new ArrayList<Request>();
+        requests = new HashMap<String, Request>();
         transactions = new ArrayList<Transaction>();
         orders = new HashMap<String, Order>();
         workers = new HashMap<String, Worker>();
