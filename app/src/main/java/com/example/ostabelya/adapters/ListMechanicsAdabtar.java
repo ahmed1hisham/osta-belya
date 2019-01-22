@@ -164,6 +164,14 @@ public int getItemCount(){
                             Toast.makeText(cont, "Please try again", Toast.LENGTH_SHORT).show();
                             return Unit.INSTANCE;
                         });
+                        FirebaseUtils.Companion.addRequestToCustomer(request,() -> {
+                            ExtensionFunctionsKt.toaster(cont,
+                                    "Request sent successfully", Toast.LENGTH_SHORT);
+                            return Unit.INSTANCE;
+                        }, () ->{
+                            Toast.makeText(cont, "Please try again", Toast.LENGTH_SHORT).show();
+                            return Unit.INSTANCE;
+                        });
 
                     }
                 });

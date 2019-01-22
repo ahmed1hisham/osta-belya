@@ -231,7 +231,7 @@ class FirebaseUtils {
     //firebaseAuth.currentUser!!.uid
         fun addRequestToMechanic(request: Request, onSuccess: () -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("mechanic")
-                .child("100")
+                .child(firebaseAuth.currentUser!!.uid)
                 .child("requests").child(UUID.randomUUID().toString()).setValue(request)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -242,7 +242,36 @@ class FirebaseUtils {
                 }
         }
 
+        fun getCustomerRequests(onSuccess: (ArrayList<Request>) -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer").child(firebaseAuth.currentUser!!.uid).child("myRequests")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val myRequests = ArrayList<Request>();
+                        for (req in dataSnapshot.children){
+                            myRequests.add(req.getValue(Request::class.java)!!)
+                        }
+                        onSuccess(myRequests)
+                    }
 
+                    override fun onCancelled(p0: DatabaseError) {
+                        onFailure()
+                    }
+
+                })
+        }
+
+        fun addRequestToCustomer(request: Request, onSuccess: () -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("customer")
+                .child(firebaseAuth.currentUser!!.uid)
+                .child("myRequests").child(UUID.randomUUID().toString()).setValue(request)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        onSuccess()
+                    } else if (!it.isSuccessful) {
+                        onFailure()
+                    }
+                }
+        }
 
 
     }

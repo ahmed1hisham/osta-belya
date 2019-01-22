@@ -1,9 +1,11 @@
 package com.example.ostabelya.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 import com.example.ostabelya.R;
 import com.example.ostabelya.adapters.ListMechanicsAdabtar;
@@ -37,5 +39,8 @@ public class ListMechanics extends AppCompatActivity {
             Toast.makeText(ListMechanics.this, "No Authenticated user", Toast.LENGTH_SHORT).show();
             return Unit.INSTANCE;
         });
+    }
+    public void onMyRequestsPressed(View v){
+        startActivity(new Intent(this, MyRequestsActivity.class));
     }
 }
