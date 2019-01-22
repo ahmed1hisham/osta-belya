@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.MechanicHome"
+        android:background="@drawable/img_background_res">
+
+    <Button
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/scheduleBtn"
+            android:onClick="scheduleButtonPressed"
+            android:background="@drawable/calendar"
+            app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="50dp"
+    android:layout_marginEnd="30dp"/>
+
+    <android.support.v7.widget.AppCompatTextView android:layout_width="51dp" android:layout_height="24dp"
+                                                 android:background="@drawable/gadwal"
+
+    app:layout_constraintTop_toBottomOf="@id/scheduleBtn"
+    app:layout_constraintEnd_toEndOf="@id/scheduleBtn"
+    app:layout_constraintStart_toStartOf="@id/scheduleBtn"/>
+
+    <Button
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/workersBtn"
+            android:onClick="workersButtonPressed"
+            android:background="@drawable/amala"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="150dp"
+            android:layout_marginStart="30dp"/>
+
+    <android.support.v7.widget.AppCompatTextView android:layout_width="51dp" android:layout_height="24dp"
+                                                 android:background="@drawable/amalatxt"
+
+                                                 app:layout_constraintTop_toBottomOf="@id/workersBtn"
+                                                 app:layout_constraintEnd_toEndOf="@id/workersBtn"
+                                                 app:layout_constraintStart_toStartOf="@id/workersBtn"/>
+
+
+    <Button
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/button3"
+            android:background="@drawable/paybtn"
+            app:layout_constraintTop_toBottomOf="@id/scheduleBtn"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="30dp"
+    android:layout_marginTop="70dp"/>
+
+    <android.support.v7.widget.AppCompatTextView android:layout_width="29dp" android:layout_height="24dp"
+                                                 android:background="@drawable/paytxt"
+                                                 app:layout_constraintTop_toBottomOf="@id/scheduleBtn"/>
+
+
+
+
+    <Button
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="431dp"
+            android:id="@+id/button4"
+            android:background="@drawable/keta3btn"/>
+
+    <android.support.v7.widget.AppCompatTextView android:layout_width="103dp" android:layout_height="24dp"
+                                                 android:background="@drawable/keta3txt"
+                                                 android:layout_marginLeft="29dp"
+                                                 android:layout_marginTop="565dp"/>
+
+
+</android.support.constraint.ConstraintLayout>
