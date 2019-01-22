@@ -24,7 +24,7 @@ public class CreateOrder extends AppCompatActivity {
     }
 
     public void confirmOrderPressed(View createOrderView){
-        TextView moneyAmount = findViewById(R.id.orderMoneyAmount);
+        TextView moneyAmount = findViewById(R.id.submit_btn);
         int money = Integer.parseInt(moneyAmount.getText().toString());
         Date orderDate = new Date();
         String token = "Token ya HUSSIEEN";
