@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.ostabelya">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:allowBackup="true"
@@ -12,22 +12,31 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".activities.MechanicSchedule">
-
         </activity>
         <activity android:name=".activities.MainActivity">
-        </activity>
-        <activity android:name=".activities.RequestDateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activities.RequestDateActivity">
+        </activity>
         <activity android:name=".activities.MechanicHome">
         </activity>
         <activity android:name=".activities.MechanicWalletActivity">
         </activity>
         <activity android:name=".activities.CreateOrder">
+        </activity>
+        <activity android:name=".activities.UserLogin">
+        </activity>
+        <activity
+                android:name=".activities.UserSignup"
+                android:label="@string/title_activity_user_signup">
+        </activity>
+        <activity android:name=".activities.MekaneekyLogin">
+        </activity>
+        <activity android:name=".activities.MekaneekySignup">
         </activity>
     </application>
 

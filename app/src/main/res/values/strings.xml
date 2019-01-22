@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Osta Belya</string>
+    <string name="title_activity_user_signup">UserSignup</string>
 </resources>
