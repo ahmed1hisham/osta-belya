@@ -74,7 +74,7 @@ public void onBindViewHolder(@NonNull ListMechanicsAdabtar.ViewHolder viewHolder
             viewHolder.categoryy.setText(mechanics.get(i).categoryy+"");
             viewHolder.description.setText(mechanics.get(i).description);
             viewHolder.name.setText(mechanics.get(i).name);
-            viewHolder.rating.setText(mechanics.get(i).rating+"");
+//            viewHolder.rating.setText(mechanics.get(i).rating+"");
             viewHolder.waitingTime.setText(mechanics.get(i).waitingTime+"");
 
         }
@@ -164,6 +164,14 @@ public int getItemCount(){
                             Toast.makeText(cont, "Please try again", Toast.LENGTH_SHORT).show();
                             return Unit.INSTANCE;
                         });
+                        FirebaseUtils.Companion.addRequestToCustomer(request,() -> {
+                            ExtensionFunctionsKt.toaster(cont,
+                                    "Request sent successfully", Toast.LENGTH_SHORT);
+                            return Unit.INSTANCE;
+                        }, () ->{
+                            Toast.makeText(cont, "Please try again", Toast.LENGTH_SHORT).show();
+                            return Unit.INSTANCE;
+                        });
 
                     }
                 });
@@ -193,16 +201,13 @@ public int getItemCount(){
 
     public ViewHolder(View itemView) {
         super(itemView);
-        image = (ImageView) itemView.findViewById(R.id.mer_image);
-        name = (TextView) itemView.findViewById(R.id.mer_name);
-        description = (TextView) itemView.findViewById(R.id.mer_description);
-        rating = (TextView) itemView.findViewById(R.id.mer_rating);
-        waitingTime = (TextView) itemView.findViewById(R.id.mer_waiting);
-        categoryy = (TextView) itemView.findViewById(R.id.mer_category);
-        location = (TextView) itemView.findViewById(R.id.mer_location);
-
-
-
+        image = (ImageView) itemView.findViewById(R.id.merchantItem_iv);
+        name = (TextView) itemView.findViewById(R.id.merchantName_tv);
+        description = (TextView) itemView.findViewById(R.id.merchantDetails_tv);
+//        rating = (TextView) itemView.findViewById(R.id.mer_rating);
+        waitingTime = (TextView) itemView.findViewById(R.id.merchantWaitingTime_tv);
+        categoryy = (TextView) itemView.findViewById(R.id.merchantCategory_tv);
+        location = (TextView) itemView.findViewById(R.id.merchantAddress_tv);
     }
 }
 }
