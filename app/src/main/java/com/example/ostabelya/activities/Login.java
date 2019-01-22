@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     public void onSignInPress(View v){
         EditText email = (EditText) findViewById(R.id.loginEmail);
         EditText pass = (EditText) findViewById(R.id.loginPassword);
-        Intent intent = new Intent(Login.this, ListMechanics.class);
+        Intent intent = new Intent(Login.this, UserHome .class);
         Intent intentM = new Intent(Login.this, MechanicHome.class);
         FirebaseUtils.Companion.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString(), () -> {
             if(email.getText().toString().equals("amrahmed@gmail.com")){

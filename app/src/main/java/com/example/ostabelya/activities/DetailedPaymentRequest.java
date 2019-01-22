@@ -1,6 +1,7 @@
 package com.example.ostabelya.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class DetailedPaymentRequest extends AppCompatActivity {
                 String paymentToken = getIntent().getStringExtra("token");
                 OrderUtils.Companion.payOrder(paymentToken, (redirectUrl) -> {
                     Log.e("url", redirectUrl);
-                    Intent i = new Intent(redirectUrl);
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(redirectUrl));
                     startActivity(i);
                     return Unit.INSTANCE;
                 });
