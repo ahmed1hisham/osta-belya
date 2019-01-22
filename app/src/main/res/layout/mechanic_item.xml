@@ -5,19 +5,25 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-android:padding="20dp">
+android:padding="20dp"
+android:background="@drawable/mechanic_item_background"
+android:layout_margin="20dp">
 
     <ImageView android:layout_width="70dp" android:layout_height="70dp"
             android:id="@+id/merchantItem_iv"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"/>
+               app:layout_constraintTop_toTopOf="parent"
+    android:src="@drawable/car_avatar"/>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:id="@+id/merchantName_tv"
     tools:text="Luxury cars"
     android:textSize="25sp"
     android:textColor="#000"
-    app:layout_constraintStart_toEndOf="@id/merchantItem_iv"/>
+    app:layout_constraintStart_toEndOf="@id/merchantItem_iv"
+              app:layout_constraintTop_toTopOf="@id/merchantItem_iv"
+              android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"/>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:id="@+id/merchantDetails_tv"
@@ -25,7 +31,8 @@ android:padding="20dp">
               android:textSize="17sp"
               android:textColor="#000"
               app:layout_constraintStart_toEndOf="@id/merchantItem_iv"
-    app:layout_constraintTop_toBottomOf="@id/merchantName_tv"/>
+    app:layout_constraintTop_toBottomOf="@id/merchantName_tv"
+              android:layout_marginStart="10dp"/>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:id="@+id/merchantAddress_tv"

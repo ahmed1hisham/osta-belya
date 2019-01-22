@@ -26,11 +26,7 @@
         <activity android:name=".activities.RequestDateActivity">
         </activity>
         <activity android:name=".activities.Login">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
 
-            <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
         </activity>
         <activity android:name=".activities.MechanicHome">
@@ -43,6 +39,11 @@
         <activity android:name=".activities.EmalaActivity">
         </activity>
         <activity android:name=".activities.ListMechanics">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
     </application>
