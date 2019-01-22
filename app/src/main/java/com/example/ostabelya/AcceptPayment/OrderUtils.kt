@@ -1,8 +1,14 @@
 package com.example.ostabelya.AcceptPayment
 
+import android.util.Log
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import okhttp3.*
 import java.io.IOException
+import com.fasterxml.jackson.databind.ObjectMapper
+
+
 
 class OrderUtils{
     companion object {
@@ -29,7 +35,8 @@ class OrderUtils{
 
                 override fun onResponse(call: Call, response: Response) {
                     val authTokenJson = response.body()!!.string()
-                    onResponse(authTokenJson)
+                    val authTokenResponse = jacksonObjectMapper().readValue<AuthTokenModel>(authTokenJson)
+                    onResponse(authTokenResponse.token)
                 }
             })
         }
@@ -43,6 +50,7 @@ class OrderUtils{
             orderRequest.merchantOrderId = merchantOrderId
 
             val orderRequestAsJson = jacksonObjectMapper().writeValueAsString(orderRequest)
+            Log.e("orderRequestJson", orderRequestAsJson)
 
             val body = RequestBody.create(JSON, orderRequestAsJson)
             val request = Request.Builder()
@@ -57,7 +65,9 @@ class OrderUtils{
 
                 override fun onResponse(call: Call, response: Response) {
                     val orderResponseJson = response.body()!!.string()
-                    onResponse(orderResponseJson)
+                    val orderResponse = jacksonObjectMapper().readValue<OrderResponse>(orderResponseJson)
+                    Log.e("orderResponseJson", orderResponseJson)
+                    onResponse(orderResponse.id.toString())
                 }
             })
         }
@@ -67,7 +77,9 @@ class OrderUtils{
                     "  \"auth_token\": \"$authToken\", \n" +
                     "  \"amount_cents\": \"$amount\", \n" +
                     "  \"expiration\": 36000, \n" +
-                    "  \"order_id\": \"$orderId\",   \n" +
+                    "  \"order\": {\n" +
+                    "\t\t\"amount_cents\": $amount\n" +
+                    "\t},   \n" +
                     "  \"currency\": \"EGP\", \n" +
                     "  \"integration_id\": $walletId ,\n" +
                     "  \"lock_order_when_paid\": \"false\" ,\n" +
@@ -96,15 +108,50 @@ class OrderUtils{
                 .build()
 
             client.newCall(request).enqueue(object: Callback{
+                override fun onFailure(call: Call, e: IOException) {}
+
+                override fun onResponse(call: Call, response: Response) {
+                    val paymentKeyResponseJson = response.body()!!.string()
+                    val paymentKeyResponse = jacksonObjectMapper().readValue<PaymentKeyResponse>(paymentKeyResponseJson)
+                    onResponse(paymentKeyResponse.token)
+                }
+            })
+        }
+
+        fun payOrder(paymentToken: String, onResponse: (authToken: String) -> Unit) {
+            val json = "{\n" +
+                    "  \"source\": {\n" +
+                    "    \"identifier\": \"01001001024\", \n" +
+                    "    \"subtype\": \"WALLET\"\n" +
+                    "  },\n" +
+                    "  \"payment_token\": \"$paymentToken\"  \n" +
+                    "}"
+
+            val body = RequestBody.create(JSON, json)
+            val request = Request.Builder()
+                .url("https://accept.paymobsolutions.com/api/acceptance/payments/pay")
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object: Callback{
                 override fun onFailure(call: Call, e: IOException) {
 
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    val paymentKeyResponseJson = response.body()!!.string()
-                    onResponse(paymentKeyResponseJson)
+                    val authTokenJson = response.body()!!.string();
+                    Log.e("responsejson", authTokenJson)
+                    val mapper = ObjectMapper()
+                    var map: Map<String, Any> = HashMap()
+
+                    // convert JSON string to Map
+                    map = mapper.readValue(authTokenJson, object : TypeReference<Map<String, Any>>() {
+
+                    })
+                    onResponse(map.get("redirect_url").toString());
                 }
             })
+
         }
     }
 }
