@@ -11,13 +11,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".activities.PayToSomeone">
+        </activity>
+        <activity android:name=".activities.PaymentRequests">
+        </activity>
+        <activity android:name=".activities.redundant">
+        </activity>
         <activity android:name=".activities.DetailedPaymentRequest">
         </activity>
         <activity android:name=".activities.MechanicSchedule">
         </activity>
         <activity android:name=".activities.MainActivity">
         </activity>
-        <activity android:name=".activities.PaymentRequests">
+        <activity android:name=".activities.RequestDateActivity">
+        </activity>
+        <activity android:name=".activities.Login">
             <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
 
@@ -32,6 +40,11 @@
         <activity android:name=".activities.CreateOrder">
 
         </activity>
+        <activity android:name=".activities.EmalaActivity">
+        </activity>
+        <activity android:name=".activities.ListMechanics">
+        </activity>
+
     </application>
 
 </manifest>

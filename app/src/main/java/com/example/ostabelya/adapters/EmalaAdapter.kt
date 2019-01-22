@@ -38,7 +38,7 @@ class EmalaAdapter(val workers: ArrayList<Worker>) : RecyclerView.Adapter<EmalaA
     }
 
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
-        val image: ImageView = itemView.findViewById(R.id.worker_img)
+        val image: ImageView = itemView.findViewById(R.id.worker_image_iv)
         val name: TextView = itemView.findViewById(R.id.worker_name)
         val salary: TextView = itemView.findViewById(R.id.worker_salary)
     }

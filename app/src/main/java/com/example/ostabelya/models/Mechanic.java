@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class
-Mechanic {
+public class Mechanic {
     public String mid;
     public int mAcceptid;
     public String apiKey;
