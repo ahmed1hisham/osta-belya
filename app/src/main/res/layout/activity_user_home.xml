@@ -5,75 +5,101 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MechanicHome"
+        tools:context=".activities.UserHome"
         android:background="@drawable/img_background_res">
 
-    <Button
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:id="@+id/scheduleBtn"
-            android:onClick="scheduleButtonPressed"
-            android:background="@drawable/calendar"
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/mechanics_iv"
+            android:onClick="mechanicsPressed"
+            android:background="@drawable/circular_background"
             app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="50dp"
-    android:layout_marginEnd="30dp"/>
+            android:src="@drawable/people_ic"
+            android:padding="20dp"
+    android:layout_marginEnd="50dp"/>
 
-    <android.support.v7.widget.AppCompatTextView android:layout_width="51dp" android:layout_height="24dp"
-                                                 android:background="@drawable/gadwal"
+    <android.support.v7.widget.AppCompatTextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                 android:text="ميكانيكية"
+                                                 android:textColor="#FFF"
+                                                 android:gravity="center"
+                                                 android:textSize="30sp"
+                                                 android:fontFamily="bold"
 
-    app:layout_constraintTop_toBottomOf="@id/scheduleBtn"
-    app:layout_constraintEnd_toEndOf="@id/scheduleBtn"
-    app:layout_constraintStart_toStartOf="@id/scheduleBtn"/>
+    app:layout_constraintTop_toBottomOf="@id/mechanics_iv"
+    app:layout_constraintEnd_toEndOf="@id/mechanics_iv"
+    app:layout_constraintStart_toStartOf="@id/mechanics_iv"/>
 
-    <Button
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:id="@+id/workersBtn"
-            android:onClick="workersButtonPressed"
-            android:background="@drawable/amala"
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/requests_iv"
+            android:onClick="requestsPressed"
+            android:background="@drawable/circular_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="150dp"
-            android:layout_marginStart="30dp"/>
+            android:layout_marginStart="50dp"
+    android:src="@drawable/cars_ic"
+    android:padding="15dp"/>
 
-    <android.support.v7.widget.AppCompatTextView android:layout_width="51dp" android:layout_height="24dp"
-                                                 android:background="@drawable/amalatxt"
+    <android.support.v7.widget.AppCompatTextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 
-                                                 app:layout_constraintTop_toBottomOf="@id/workersBtn"
-                                                 app:layout_constraintEnd_toEndOf="@id/workersBtn"
-                                                 app:layout_constraintStart_toStartOf="@id/workersBtn"/>
+                                                 android:text="طلبات"
+                                                 android:textColor="#FFF"
+                                                 android:gravity="center"
+                                                 android:textSize="30sp"
+                                                 android:fontFamily="bold"
+                                                 app:layout_constraintTop_toBottomOf="@id/requests_iv"
+                                                 app:layout_constraintEnd_toEndOf="@id/requests_iv"
+                                                 app:layout_constraintStart_toStartOf="@id/requests_iv"/>
 
 
     <Button
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:id="@+id/button3"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/paybtn"
             android:background="@drawable/paybtn"
-            app:layout_constraintTop_toBottomOf="@id/scheduleBtn"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginEnd="30dp"
+            android:onClick="payRequestsPressed"
+            app:layout_constraintTop_toBottomOf="@id/mechanics_iv"
+
+            app:layout_constraintStart_toStartOf="@id/mechanics_iv"
+    app:layout_constraintEnd_toEndOf="@id/mechanics_iv"
     android:layout_marginTop="70dp"/>
 
-    <android.support.v7.widget.AppCompatTextView android:layout_width="29dp" android:layout_height="24dp"
-                                                 android:background="@drawable/paytxt"
-                                                 app:layout_constraintTop_toBottomOf="@id/scheduleBtn"/>
+    <android.support.v7.widget.AppCompatTextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                 android:text="دفع"
+                                                 android:textColor="#FFF"
+                                                 android:gravity="center"
+                                                 android:textSize="30sp"
+                                                 android:fontFamily="bold"
+                                                 app:layout_constraintTop_toBottomOf="@id/paybtn"
+                                                 app:layout_constraintStart_toStartOf="@id/paybtn"
+    app:layout_constraintEnd_toEndOf="@id/paybtn"/>
 
 
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/walletBtn"
+            android:background="@drawable/circular_background"
+            app:layout_constraintTop_toBottomOf="@id/requests_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="70dp"
+    android:src="@drawable/wallet_ic"
+    android:padding="20dp"/>
 
-
-    <Button
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="431dp"
-            android:id="@+id/button4"
-            android:background="@drawable/keta3btn"/>
-
-    <android.support.v7.widget.AppCompatTextView android:layout_width="103dp" android:layout_height="24dp"
-                                                 android:background="@drawable/keta3txt"
-                                                 android:layout_marginLeft="29dp"
-                                                 android:layout_marginTop="565dp"/>
-
+    <android.support.v7.widget.AppCompatTextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                 android:text="المحفظة"
+                                                 android:textColor="#FFF"
+                                                 android:gravity="center"
+                                                 android:textSize="30sp"
+                                                 android:fontFamily="bold"
+                                                 app:layout_constraintTop_toBottomOf="@id/walletBtn"
+                                                 app:layout_constraintStart_toStartOf="@id/walletBtn"
+                                                 app:layout_constraintEnd_toEndOf="@id/walletBtn"/>
 
 </android.support.constraint.ConstraintLayout>
