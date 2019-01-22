@@ -73,7 +73,9 @@ class OrderUtils{
                     "  \"auth_token\": \"$authToken\", \n" +
                     "  \"amount_cents\": \"$amount\", \n" +
                     "  \"expiration\": 36000, \n" +
-                    "  \"order_id\": \"$orderId\",   \n" +
+                    "  \"order\": {\n" +
+                    "\t\t\"amount_cents\": $amount\n" +
+                    "\t},   \n" +
                     "  \"currency\": \"EGP\", \n" +
                     "  \"integration_id\": $walletId ,\n" +
                     "  \"lock_order_when_paid\": \"false\" ,\n" +
@@ -110,6 +112,37 @@ class OrderUtils{
                     onResponse(paymentKeyResponse.token)
                 }
             })
+        }
+
+        fun payOrder(paymentToken: String, onResponse: (authToken: String) -> Unit) {
+            val json = "{\n" +
+                    "  \"source\": {\n" +
+                    "    \"identifier\": \"01001001024\", \n" +
+                    "    \"subtype\": \"WALLET\"\n" +
+                    "  },\n" +
+                    "  \"payment_token\": \"$paymentToken\"  \n" +
+                    "}"
+
+            val body = RequestBody.create(JSON, json)
+            val request = Request.Builder()
+                .url("https://accept.paymobsolutions.com/api/acceptance/payments/pay")
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object: Callback{
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val authTokenJson = response.body()!!.string()
+                    Log.e("responsejson", authTokenJson)
+
+                    val responses = jacksonObjectMapper().readValue<PaymentResponse>(authTokenJson)
+                    onResponse(responses.redirectUrl)
+                }
+            })
+
         }
     }
 }

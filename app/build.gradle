@@ -52,6 +52,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.4.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.4.1'
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7"
+    implementation 'com.beust:klaxon:5.0.1'
+    compile group: 'org.json', name: 'json', version: '20180813'
+
 
     implementation 'com.budiyev.android:code-scanner:2.1.0'
 

@@ -19,16 +19,18 @@
         </activity>
         <activity android:name=".activities.PaymentRequests">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
         <activity android:name=".activities.MechanicHome">
         </activity>
         <activity android:name=".activities.MechanicWalletActivity">
         </activity>
         <activity android:name=".activities.CreateOrder">
+
         </activity>
     </application>
 
