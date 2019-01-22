@@ -40,7 +40,7 @@ public class ListMechanics extends AppCompatActivity {
             return Unit.INSTANCE;
         });
     }
-    public void onMyRequestsPressed(View v){
-        startActivity(new Intent(this, MyRequestsActivity.class));
+    public void onPaymentRequestsButtonPressed(View v){
+        startActivity(new Intent(this, PaymentRequests.class));
     }
 }

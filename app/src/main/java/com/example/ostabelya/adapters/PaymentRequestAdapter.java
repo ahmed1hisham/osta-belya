@@ -56,6 +56,7 @@ public class PaymentRequestAdapter extends RecyclerView.Adapter<PaymentRequestAd
                 intent.putExtra("MECHANIC_ID", paymentRequests.get(i).mid);
                 intent.putExtra("MONEY", paymentRequests.get(i).moneyAmount);
                 intent.putExtra("DATE", paymentRequests.get(i).date);
+                intent.putExtra("token", paymentRequests.get(i).token);
                 cont.startActivity(intent);
             }
         });
@@ -76,7 +77,6 @@ public class PaymentRequestAdapter extends RecyclerView.Adapter<PaymentRequestAd
             mechanicName = (TextView) itemView.findViewById(R.id.paymentRequestMechanicName);
             moneyAmount = (TextView) itemView.findViewById(R.id.paymentRequestMoneyAmount);
             date = (TextView) itemView.findViewById(R.id.paymentRequestDate);
-
         }
     }
 }

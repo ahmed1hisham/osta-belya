@@ -231,7 +231,7 @@ class FirebaseUtils {
     //firebaseAuth.currentUser!!.uid
         fun addRequestToMechanic(request: Request, onSuccess: () -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("mechanic")
-                .child(firebaseAuth.currentUser!!.uid)
+                .child(request.mid)
                 .child("requests").child(UUID.randomUUID().toString()).setValue(request)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
