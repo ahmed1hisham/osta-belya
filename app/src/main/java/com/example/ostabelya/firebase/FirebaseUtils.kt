@@ -139,7 +139,7 @@ class FirebaseUtils {
 
         fun addOrderToMechanic(order: Order, onSuccess: () -> Unit, onFailure: () -> Unit){
             firebaseDatabase.reference.child("mechanic")
-                .child("100")
+                .child(firebaseAuth.currentUser!!.uid)
                 .child("orders").child(order.orderID).setValue(order)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -162,17 +162,16 @@ class FirebaseUtils {
         }
 
         fun getCurrentAuthMechanic(onSuccess: (String) -> Unit, onFailure: () -> Unit){
-//            firebaseDatabase.reference.child(firebaseAuth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
-//                override fun onCancelled(p0: DatabaseError) {
-//                    onFailure()
-//                }
-//
-//                override fun onDataChange(p0: DataSnapshot) {
-//                    onSuccess(firebaseAuth.currentUser!!.uid)
-//                }
-//
-//            })
-            onSuccess("100")
+            firebaseDatabase.reference.child(firebaseAuth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    onFailure()
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    onSuccess(firebaseAuth.currentUser!!.uid)
+                }
+
+            })
         }
 
 
