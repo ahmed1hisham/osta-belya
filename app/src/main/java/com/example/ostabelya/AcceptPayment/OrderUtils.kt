@@ -1,10 +1,14 @@
 package com.example.ostabelya.AcceptPayment
 
 import android.util.Log
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import okhttp3.*
 import java.io.IOException
+import com.fasterxml.jackson.databind.ObjectMapper
+
+
 
 class OrderUtils{
     companion object {
@@ -135,11 +139,16 @@ class OrderUtils{
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    val authTokenJson = response.body()!!.string()
+                    val authTokenJson = response.body()!!.string();
                     Log.e("responsejson", authTokenJson)
+                    val mapper = ObjectMapper()
+                    var map: Map<String, Any> = HashMap()
 
-                    val responses = jacksonObjectMapper().readValue<PaymentResponse>(authTokenJson)
-                    onResponse(responses.redirectUrl)
+                    // convert JSON string to Map
+                    map = mapper.readValue(authTokenJson, object : TypeReference<Map<String, Any>>() {
+
+                    })
+                    onResponse(map.get("redirect_url").toString());
                 }
             })
 

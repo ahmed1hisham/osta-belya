@@ -168,7 +168,7 @@ class FirebaseUtils {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    onSuccess(firebaseAuth.currentUser!!.uid);
+                    onSuccess(firebaseAuth.currentUser!!.uid)
                 }
 
             })
