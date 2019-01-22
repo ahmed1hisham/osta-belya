@@ -2,20 +2,18 @@ package com.example.ostabelya.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import com.example.ostabelya.ExtensionFunctionsKt;
 import com.example.ostabelya.R;
-import com.example.ostabelya.adapters.MechanicPaymentsAdapter;
-import com.example.ostabelya.firebase.FirebaseUtils;
 import com.example.ostabelya.models.Request;
-import com.google.firebase.auth.FirebaseAuth;
-import kotlin.Unit;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -128,5 +126,27 @@ public class RequestDateActivity extends AppCompatActivity implements DatePicker
         }
         request.requestSlot = hourFinalString+":"+minuteFinalString;
         dtResult.setText(date + " @ " + hourFinalString + ":" + minuteFinalString);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequestDateActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Are you sure you want to book at this time?");
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //FireBase Function
+                        ExtensionFunctionsKt.toaster(RequestDateActivity.this,
+                                "Done Done Done",Toast.LENGTH_SHORT);
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

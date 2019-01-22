@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.*
 
 
 class FirebaseUtils {
@@ -213,6 +214,19 @@ class FirebaseUtils {
                     }
 
                 })
+        }
+    //firebaseAuth.currentUser!!.uid
+        fun addRequestToMechanic(request: Request, onSuccess: () -> Unit, onFailure: () -> Unit){
+            firebaseDatabase.reference.child("mechanic")
+                .child("100")
+                .child("requests").child(UUID.randomUUID().toString()).setValue(request)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        onSuccess()
+                    } else if (!it.isSuccessful) {
+                        onFailure()
+                    }
+                }
         }
 
     }
