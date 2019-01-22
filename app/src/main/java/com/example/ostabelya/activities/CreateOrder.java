@@ -9,6 +9,7 @@ import com.example.ostabelya.AcceptPayment.OrderUtils;
 import com.example.ostabelya.R;
 import com.example.ostabelya.firebase.FirebaseUtils;
 import com.example.ostabelya.models.Order;
+import com.google.firebase.auth.FirebaseAuth;
 import kotlin.Unit;
 
 import java.util.Date;
@@ -52,7 +53,7 @@ public class CreateOrder extends AppCompatActivity {
                 return Unit.INSTANCE;
             });
 
-            FirebaseUtils.Companion.addPaymentRequestToCustomer(order,"100", ()->{
+            FirebaseUtils.Companion.addPaymentRequestToCustomer(order,uid , ()->{
                 Toast.makeText(CreateOrder.this, "Order Added", Toast.LENGTH_SHORT).show();
                 return Unit.INSTANCE;
             }, () ->{
