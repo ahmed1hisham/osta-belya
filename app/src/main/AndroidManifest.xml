@@ -26,15 +26,12 @@
         <activity android:name=".activities.RequestDateActivity">
         </activity>
         <activity android:name=".activities.Login">
-
-
         </activity>
         <activity android:name=".activities.MechanicHome">
         </activity>
         <activity android:name=".activities.MechanicWalletActivity">
         </activity>
         <activity android:name=".activities.CreateOrder">
-
         </activity>
         <activity android:name=".activities.EmalaActivity">
         </activity>
@@ -45,7 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
+        <activity android:name=".activities.UserHome">
+        </activity>
     </application>
 
 </manifest>
