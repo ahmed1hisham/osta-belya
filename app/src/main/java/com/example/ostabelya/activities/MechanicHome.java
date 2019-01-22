@@ -14,12 +14,12 @@ public class MechanicHome extends AppCompatActivity {
         setContentView(R.layout.activity_mechanic_home);
     }
 
-//    public void scheduleButtonPressed(View homeScreenView){
-//        startActivity(new Intent(this, ));
-//    }
-//    public void workersButtonPressed(View homeScreenView){
-//        startActivity(new Intent(this, ));
-//    }
+    public void scheduleButtonPressed(View homeScreenView){
+        startActivity(new Intent(this, MechanicSchedule.class));
+    }
+    public void workersButtonPressed(View homeScreenView){
+        startActivity(new Intent(this,EmalaActivity.class ));
+    }
 //    public void payButtonPressed(View homeScreenView){
 //        startActivity(new Intent(this, ));
 //    }

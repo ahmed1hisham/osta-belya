@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.CreateOrder">
+        tools:context=".activities.CreateOrder"
+        android:fitsSystemWindows="false"
+android:background="@drawable/blurhussein">
+
+
+    <ImageView android:layout_width="match_parent" android:layout_height="wrap_content"
+               android:layout_marginLeft="0dp"
+               android:layout_marginTop="0dp"
+               android:src="@drawable/homemech"
+               android:adjustViewBounds="true"
+               android:fitsSystemWindows="false"
+               />
+
+    <Button
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="326dp"
+            android:id="@+id/button3"
+            android:background="@drawable/paybtngreen"/>
+
+    <ImageView android:layout_width="181.12dp" android:layout_height="284.1dp"
+    android:layout_marginLeft="92dp"
+    android:layout_marginTop="74.4dp"
+    android:background="@drawable/boxpay"/>
+
+    <android.support.v7.widget.AppCompatTextView android:layout_width="29dp" android:layout_height="24dp"
+                                                 android:background="@drawable/paytxt"
+                                                 android:layout_marginLeft="266dp"
+                                                 android:layout_marginTop="460dp"/>
+
+
+
+
 
     <Button
             android:text="Button"
@@ -26,4 +59,4 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/confirmOrder" android:hint="100"/>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
