@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MechanicSchedule">
+        tools:context=".activities.MechanicSchedule"
+android:background="@drawable/img_background_res">
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="395dp"
@@ -22,7 +23,8 @@
             android:layout_height="39dp"
             android:id="@+id/decre" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="55dp"
-            app:layout_constraintEnd_toStartOf="@+id/incre" android:layout_marginEnd="116dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/incre" android:layout_marginEnd="116dp"
+            />
     <Button
             android:text="+"
             android:layout_width="89dp"
