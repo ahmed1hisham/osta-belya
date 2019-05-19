@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "114144908632-2l46g533k5jj1gkuo0i6shgq0ospj4is.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.ostabelya",
-            "certificate_hash": "72dca92ed5439c8e36f41ed82d07abb090f0e00b"
-          }
-        },
-        {
           "client_id": "114144908632-0ufdtmdvq3sdftbb9taoqgvb3tes53kl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.ostabelya",
             "certificate_hash": "e96d76edc71f4479fb8e18462c6f88c4894bee9c"
+          }
+        },
+        {
+          "client_id": "114144908632-2l46g533k5jj1gkuo0i6shgq0ospj4is.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ostabelya",
+            "certificate_hash": "72dca92ed5439c8e36f41ed82d07abb090f0e00b"
           }
         },
         {
@@ -41,20 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "114144908632-v9vfuonrohojnbgm1srtg4qa9pnns4b5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
